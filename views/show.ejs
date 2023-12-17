@@ -1,0 +1,17 @@
+<%- include('partials/head') %>
+<br><br>
+<div class="livro">
+    <img src="<%=livro.img  %>" alt="">
+    <p class="white">Titulo: <%=livro.titulo  %></p>
+    <p class="white">Autor: <%=livro.autor  %></p>
+    <p class="white">ISBN_13: <%=livro.isbn13  %></p>
+    <p class="white">ISBN_10: <%=livro.isbn10  %></p>
+    <form action="/livro/<%=livro._id%>?_method=DELETE" method="post">
+        <button class="right">Remover da lista</button>
+    </form>
+</div>
+
+<a href="/meusLivros"><p>Voltar</p></a>
+
+
+<%- include('partials/footer') %>

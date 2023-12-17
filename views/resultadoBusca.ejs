@@ -1,0 +1,50 @@
+<%- include('partials/head') %>
+
+<% if(resposta.totalItems > 0) { %>
+    <h2>Livros encontrados</h2>
+
+    <% for(item of resposta.items) {
+        const livro = item.volumeInfo
+        let autores = ""
+        if (livro.authors) {
+            for (let i = 0; i < livro.authors.length; i++){
+                autores += livro.authors[i]
+                if(i < livro.authors.length - 1){
+                    autores += ", "
+                } else {
+                    autores += '.'
+                }
+            }
+        }
+    
+    %>
+
+    <%
+        const isbn13 = livro.industryIdentifiers[0]?.identifier
+        const isbn10 = livro.industryIdentifiers[1]?.identifier
+        const img = livro.imageLinks ? livro.imageLinks.thumbnail : 'imgs/transparent.png'
+    %>    
+    <div class="livro">
+        <img src="<%= img %>" alt="">
+        <form action="/addFav/<%=livro.title%>/<%=autores%>/<%=isbn13%>/<%=isbn10%>/<%=encodeURIComponent(img)%>">
+        <p>Título: <%= livro.title %></p>
+        <p>Autores: <%= autores %></p>
+        <div>
+            <% if(livro.industryIdentifiers) {
+                for(isbn of livro.industryIdentifiers) { %>
+                <p><%= isbn.type %>: <%= isbn.identifier %></p>
+                <% }
+            } %>    
+        </div>
+        <button type="submit">Adicionar a minha lista</button>
+    </form>
+    </div>
+
+
+<% } %>
+<% } else { %>
+    <h2>Nenhum livro encontrado</h2>
+<% } %>
+<a href="/"><p>Voltar</p></a>
+
+<%- include('partials/footer') %>

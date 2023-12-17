@@ -1,0 +1,21 @@
+<%- include('partials/head') %>
+
+
+
+<div class="center">
+    <h3>Meus Livros</h3>
+    <% if(livros && livros.length > 0) { %>
+        <% for(const livro of livros) { %>
+           <li><a class="center" href="/livro/<%=livro.id%>"><%=livro.titulo %></a></li>
+            <br>
+            <% } %>
+    <% } else { %>
+        <h3>(A lista está vazia)</h3>
+        <% } %>
+</div>
+
+
+<a href="/"><p>Voltar</p></a>
+
+
+<%- include('partials/footer') %>
